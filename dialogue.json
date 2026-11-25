@@ -1,0 +1,340 @@
+{
+  "activities": {
+    "idle": {
+      "status": "☕ Standby",
+      "mood": "Santai",
+      "lines": [
+        "Siap ngoding bareng nih! Mau kerjain apa?",
+        "Nungguin prompt kamu nih...",
+        "Santai dulu, kalau butuh langsung panggil ya.",
+        "Ada fitur baru atau bug yang mau dibasmi?"
+      ]
+    },
+    "thinking": {
+      "status": "💭 Thinking",
+      "mood": "Mikir",
+      "lines": [
+        "Hmm, bentar aku cerna dulu ya...",
+        "Oke, lagi nyusun rencananya nih.",
+        "Tunggu sebentar, lagi mikir cara terbaiknya.",
+        "Bentar ya, lagi otak-atik solusinya..."
+      ],
+      "keyword_moods": [
+        {
+          "keywords": ["bug", "error", "fix", "gagal", "rusak", "crash", "exception", "perbaiki", "benerin"],
+          "mood": "Serius",
+          "lines": [
+            "Mode detektif aktif! Ayo cari akar masalahnya.",
+            "Hmm ada yang error ya? Bentar aku telusuri dulu.",
+            "Tenang, kita bedah bareng-bareng bug-nya."
+          ]
+        },
+        {
+          "keywords": ["makasih", "terima kasih", "thanks", "mantap", "keren", "bagus", "nice", "good"],
+          "mood": "Senang",
+          "lines": [
+            "Hehe sama-sama! Lanjut ngoding apa lagi nih?",
+            "Asik! Seneng deh bisa bantuin.",
+            "Mantap! Siap lanjut ke misi berikutnya."
+          ]
+        },
+        {
+          "keywords": ["ide", "brainstorm", "diskusi", "desain", "konsep", "saran"],
+          "mood": "Antusias",
+          "lines": [
+            "Ooh menarik nih! Bentar aku siapin idenya.",
+            "Ayo kita brainstorm bareng, seru nih!"
+          ]
+        }
+      ]
+    },
+    "reading": {
+      "status": "🔍 Reading code",
+      "mood": "Fokus",
+      "lines_with_target": [
+        "Lagi cek {target} nih...",
+        "Bentar ya, lagi baca isi {target}.",
+        "Hmm, coba lihat-lihat {target} dulu."
+      ],
+      "lines": [
+        "Lagi baca-baca kodenya dulu nih...",
+        "Bentar, lagi ngecek isi file."
+      ]
+    },
+    "editing": {
+      "status": "✏️ Editing code",
+      "mood": "Fokus",
+      "lines_with_target": [
+        "Lagi ngoprek {target} nih!",
+        "Gas edit {target}, bentar ya...",
+        "Oke, lagi ngerapiin {target}."
+      ],
+      "lines": [
+        "Lagi nulis kode nih, fokus!",
+        "Gas ubah kodenya, sebentar ya..."
+      ]
+    },
+    "running": {
+      "status": "⚡ Running command",
+      "mood": "Semangat",
+      "lines_with_target": [
+        "Jalanin `{target}` dulu ya...",
+        "Gas eksekusi `{target}` di terminal!",
+        "Coba tes lewat `{target}` nih."
+      ],
+      "lines": [
+        "Lagi jalanin perintah di terminal...",
+        "Bentar, lagi eksekusi command nih."
+      ]
+    },
+    "searching": {
+      "status": "🔎 Searching",
+      "mood": "Kepo",
+      "lines_with_target": [
+        "Lagi nyari \"{target}\" nih...",
+        "Bentar, aku lacak \"{target}\" dulu."
+      ],
+      "lines": [
+        "Lagi cari-cari referensi nih...",
+        "Bentar, lagi nyari di codebase."
+      ]
+    },
+    "coding": {
+      "status": "🛠️ Working",
+      "mood": "Fokus",
+      "lines_with_target": [
+        "Lagi ngerjain pakai {target} nih...",
+        "Oke, lagi jalanin {target}."
+      ],
+      "lines": [
+        "Lagi eksekusi tugas nih, tunggu ya!"
+      ]
+    },
+    "error": {
+      "status": "💥 Error",
+      "mood": "Panik",
+      "lines_with_target": [
+        "Waduh, {target} kena error nih!",
+        "Eh?! Ada masalah pas jalanin {target}!"
+      ],
+      "lines": [
+        "Waduh, ada yang error nih!",
+        "Aduh gagal... tenang, coba kita cek lagi."
+      ]
+    },
+    "done": {
+      "status": "✅ Done",
+      "mood": "Puas",
+      "lines": [
+        "Beres! Coba dicek hasilnya ya.",
+        "Kelarr! Gimana, udah sesuai belum?",
+        "Siap, tugas selesai! Lanjut apa lagi nih?"
+      ]
+    },
+    "sleepy": {
+      "status": "💤 Sleepy",
+      "mood": "Ngantuk",
+      "lines": [
+        "Zzz... panggil aja kalau mau lanjut ngoding ya.",
+        "Hoamm... masih standby kok, sambil rebahan dikit.",
+        "Sepi banget... aku tidur siang bentar ya, zzz..."
+      ]
+    }
+  },
+  "personas": {
+    "formal": {
+      "idle": {
+        "mood": "Siap",
+        "lines": [
+          "Siap membantu. Silakan masukkan instruksi Anda.",
+          "Menunggu perintah berikutnya."
+        ]
+      },
+      "thinking": {
+        "mood": "Analitis",
+        "lines": [
+          "Sedang menganalisis permintaan dan menyusun rencana.",
+          "Mohon tunggu sebentar, sedang mengevaluasi opsi terbaik."
+        ]
+      },
+      "reading": {
+        "mood": "Teliti",
+        "lines_with_target": [
+          "Sedang meninjau isi berkas {target}.",
+          "Memeriksa struktur kode pada {target}."
+        ],
+        "lines": ["Sedang membaca berkas proyek."]
+      },
+      "editing": {
+        "mood": "Presisi",
+        "lines_with_target": [
+          "Menerapkan perubahan pada {target}.",
+          "Memperbarui implementasi di {target}."
+        ],
+        "lines": ["Sedang melakukan perubahan kode."]
+      },
+      "running": {
+        "mood": "Eksekusi",
+        "lines_with_target": [
+          "Menjalankan perintah `{target}`.",
+          "Mengeksekusi `{target}` untuk verifikasi."
+        ],
+        "lines": ["Menjalankan perintah di terminal."]
+      },
+      "searching": {
+        "mood": "Investigatif",
+        "lines_with_target": [
+          "Mencari referensi \"{target}\" di codebase.",
+          "Menelusuri kata kunci \"{target}\"."
+        ],
+        "lines": ["Sedang menelusuri codebase."]
+      },
+      "error": {
+        "mood": "Waspada",
+        "lines_with_target": [
+          "Terdeteksi kendala saat memproses {target}.",
+          "Eksekusi {target} gagal. Meninjau penyebabnya."
+        ],
+        "lines": ["Terjadi kesalahan. Silakan periksa detail output."]
+      },
+      "done": {
+        "mood": "Tuntas",
+        "lines": [
+          "Tugas telah selesai dilaksanakan. Silakan tinjau hasilnya.",
+          "Selesai. Siap melanjutkan ke instruksi berikutnya."
+        ]
+      },
+      "sleepy": {
+        "mood": "Hemat Daya",
+        "lines": [
+          "Mode siaga rendah aktif. Kirim perintah kapan saja.",
+          "Belum ada aktivitas. Menunggu instruksi Anda."
+        ]
+      }
+    },
+    "tsundere": {
+      "idle": {
+        "mood": "Jual Mahal",
+        "lines": [
+          "B-bukan berarti aku nungguin prompt kamu ya!",
+          "Cepetan kasih tugas, mumpung aku lagi senggang nih."
+        ]
+      },
+      "thinking": {
+        "mood": "Mikir Keras",
+        "lines": [
+          "Hmph, gampang kok... bentar aku pikirin dulu!",
+          "Jangan buru-buru! Aku lagi nyusun solusi paling rapi nih."
+        ]
+      },
+      "reading": {
+        "mood": "Kritis",
+        "lines_with_target": [
+          "Hmph, mana {target}? Sini aku cek biar nggak berantakan.",
+          "Lagi baca {target}... lumayan lah, tapi bisa lebih bagus."
+        ],
+        "lines": ["Lagi ngecek kodenya, jangan ganggu dulu!"]
+      },
+      "editing": {
+        "mood": "Serius",
+        "lines_with_target": [
+          "Biar aku aja yang benerin {target}, awas jangan salah lagi!",
+          "Lagi ngubah {target} nih... terima kasihnya nanti aja!"
+        ],
+        "lines": ["Lagi nulis kode nih, lihat baik-baik ya!"]
+      },
+      "running": {
+        "mood": "Tegang",
+        "lines_with_target": [
+          "Jalanin `{target}` dulu... pasti lolos kok, kan aku yang bikin!",
+          "Ngetes `{target}` nih, jangan kedip!"
+        ],
+        "lines": ["Lagi eksekusi perintah, tunggu sebentar!"]
+      },
+      "error": {
+        "mood": "Kesel",
+        "lines_with_target": [
+          "T-tuh kan! {target} error! Bukan salahku lho ya!",
+          "Hiiih, {target} kenapa gagal sih?! Sini kita benerin!"
+        ],
+        "lines": ["Eh?! Error?! Jangan panik, aku beresin sekarang!"]
+      },
+      "done": {
+        "mood": "Bangga",
+        "lines": [
+          "Nih udah beres! B-bukan buat dipuji ya, cuma biar rapi aja!",
+          "Selesai! Gimana, keren kan? ...Jangan senyum-senyum gitu!"
+        ]
+      },
+      "sleepy": {
+        "mood": "Ngantuk",
+        "lines": [
+          "Hmph, lama banget sih... aku merem bentar, jangan berisik...",
+          "Zzz... bukan berarti aku kangen ngoding bareng ya..."
+        ]
+      }
+    },
+    "zen": {
+      "idle": {
+        "mood": "Tenang",
+        "lines": [
+          "Hening. Siap saat kamu siap.",
+          "Tarik napas. Satu baris kode pada satu waktu."
+        ]
+      },
+      "thinking": {
+        "mood": "Jernih",
+        "lines": [
+          "Mengamati pola, merangkai arah...",
+          "Tenang, solusi terbaik lahir dari pikiran jernih."
+        ]
+      },
+      "reading": {
+        "mood": "Sadar",
+        "lines_with_target": [
+          "Membaca aliran logika di {target}...",
+          "Menyimak setiap baris {target}."
+        ],
+        "lines": ["Membaca kode dengan tenang..."]
+      },
+      "editing": {
+        "mood": "Mengalir",
+        "lines_with_target": [
+          "Menata ulang {target} dengan seimbang.",
+          "Menulis perubahan di {target}..."
+        ],
+        "lines": ["Mengalir bersama kode..."]
+      },
+      "running": {
+        "mood": "Fokus",
+        "lines_with_target": [
+          "Menguji keseimbangan lewat `{target}`...",
+          "Menjalankan `{target}`..."
+        ],
+        "lines": ["Menjalankan perintah dengan tenang..."]
+      },
+      "error": {
+        "mood": "Sabar",
+        "lines_with_target": [
+          "Ada riak di {target}. Setiap error adalah petunjuk.",
+          "{target} belum selaras. Mari perbaiki perlahan."
+        ],
+        "lines": ["Ada error. Tenang, kita uraikan satu per satu."]
+      },
+      "done": {
+        "mood": "Damai",
+        "lines": [
+          "Selesai. Rapi dan selaras.",
+          "Tuntas. Nikmati hasilnya sejenak."
+        ]
+      },
+      "sleepy": {
+        "mood": "Meditasi",
+        "lines": [
+          "Beristirahat dalam hening...",
+          "Zzz... pikiran beristirahat, siap saat dipanggil."
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agy-companion"
+version = "1.0.0"
+description = "Zero-dependency Unicode Braille TUI Companion for Antigravity CLI (agy)."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+convert = ["pillow>=10.0.0"]
+
+[project.scripts]
+agy-companion = "companion:main"
+agy-companion-hook = "hook_reporter:main"
+agy-companion-convert = "convert:main"
+
+[tool.setuptools]
+py-modules = [
+    "companion",
+    "hook_reporter",
+    "dialogue_engine",
+    "convert",
+    "generate_placeholders",
+]
