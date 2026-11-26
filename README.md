@@ -1,104 +1,104 @@
 # agy-companion
 
-Companion TUI berbasis Unicode Braille untuk **Antigravity CLI (`agy`)** menggunakan split-pane terminal dan Antigravity Lifecycle Hooks — **0 token tambahan** & **0 dependency di runtime**.
+A Unicode Braille TUI companion for **Antigravity CLI (`agy`)** using a split-pane terminal and Antigravity Lifecycle Hooks — **0 extra tokens** & **0 runtime dependencies**.
 
-## Fitur
-- **5 state inti + 5 state granular opsional:** `idle`, `thinking`, `coding`, `error`, `done`, plus animasi opsional `reading`, `editing`, `running`, `searching`, dan `sleepy` (otomatis fallback ke `coding`/`idle` jika belum dibuat).
-- **Status, Mood & Dialog lokal (0 token):** diatur di [dialogue.json](./dialogue.json) dan otomatis menyebut nama file/perintah yang sedang dikerjakan (mis. `🔍 Reading code` · `"Lagi cek auth.ts nih..."`).
-- **Theme, Persona & Character Packs:**
-  - **5 tema warna ANSI:** `mono`, `amber`, `green`, `cyan`, `pastel`
-  - **4 gaya bahasa/persona:** `santai`, `formal`, `tsundere`, `zen`
-  - **Multi-karakter:** buat pack karakter sendiri di [characters/README.md](./characters/README.md)
-- **Live-Reload & Mini Session Stats:** otomatis muat ulang `assets/frames/*.json` dan `dialogue.json` saat diedit, serta tampilkan durasi sesi (`⏱`), jumlah tool call (`🛠`), file disentuh (`📄`), streak `done` (`🔥`), dan mini activity log.
-- **Auto-Sleepy:** otomatis masuk mode ngantuk setelah `idle` terlalu lama (default 5 menit, bisa diatur lewat `--sleepy-after`).
-- **Isolasi Multi-Sesi:** setiap tab `agy-live` memakai state file sendiri via `AGY_COMPANION_STATE_FILE` sehingga beberapa sesi bisa berjalan bersamaan tanpa saling menimpa.
-- **Cross-Platform & Packaging:** mendukung Windows Terminal ([scripts/launch-agy-live.ps1](./scripts/launch-agy-live.ps1)), Linux/macOS/WSL via `tmux`/WezTerm ([scripts/launch-agy-live.sh](./scripts/launch-agy-live.sh)), dan [pyproject.toml](./pyproject.toml).
-- **Konverter PNG → Braille:** [convert.py](./convert.py) mengubah sketsa manual PNG di `assets/raw/<state>/` (atau `characters/<id>/raw/<state>/`) dengan *natural sort* dan opsi `--aspect`.
+## Features
+- **5 core states + 5 optional granular states:** `idle`, `thinking`, `coding`, `error`, `done`, plus optional `reading`, `editing`, `running`, `searching`, and `sleepy` animations (automatically falls back to `coding`/`idle` if not created yet).
+- **Local Status, Mood & Dialogue (0 tokens):** configured in [dialogue.json](./dialogue.json) and automatically mentions the file/command currently being worked on (e.g., `🔍 Reading code` · `"Checking auth.ts..."`).
+- **Themes, Personas & Character Packs:**
+  - **5 ANSI color themes:** `mono`, `amber`, `green`, `cyan`, `pastel`
+  - **4 dialogue styles/personas:** `santai`, `formal`, `tsundere`, `zen`
+  - **Multi-character:** create your own character pack in [characters/README.md](./characters/README.md)
+- **Live-Reload & Mini Session Stats:** automatically reloads `assets/frames/*.json` and `dialogue.json` when edited, and displays session duration (`⏱`), tool call count (`🛠`), files touched (`📄`), `done` streak (`🔥`), and a mini activity log.
+- **Auto-Sleepy:** automatically enters sleepy mode after being `idle` for too long (default 5 minutes, configurable via `--sleepy-after`).
+- **Multi-Session Isolation:** each `agy-live` tab uses its own state file via `AGY_COMPANION_STATE_FILE` so multiple sessions can run concurrently without overwriting each other.
+- **Cross-Platform & Packaging:** supports Windows Terminal ([scripts/launch-agy-live.ps1](./scripts/launch-agy-live.ps1)), Linux/macOS/WSL via `tmux`/WezTerm ([scripts/launch-agy-live.sh](./scripts/launch-agy-live.sh)), and [pyproject.toml](./pyproject.toml).
+- **PNG → Braille Converter:** [convert.py](./convert.py) converts manual PNG sketches in `assets/raw/<state>/` (or `characters/<id>/raw/<state>/`) with *natural sort* and an `--aspect` option.
 
 ---
 
-## 1. Coba Langsung Sekarang
+## 1. Try It Right Now
 
-Jalankan mode preview interaktif (tidak perlu install apa-apa):
+Run interactive preview mode (no installation required):
 
 ```powershell
 python companion.py --demo
 ```
 
-Atau putar semua state otomatis tiap 3 detik dengan tema & persona tertentu:
+Or cycle through all states automatically every 3 seconds with a specific theme & persona:
 
 ```powershell
 python companion.py --cycle --theme amber --persona tsundere
 ```
 
-### Hotkey di Pane Companion
-| Tombol | Fungsi |
+### Companion Pane Hotkeys
+| Key | Action |
 | :---: | :--- |
-| **`t`** | Ganti tema warna (`mono` → `amber` → `green` → `cyan` → `pastel`) |
-| **`m`** | Ganti persona/gaya bahasa (`santai` → `formal` → `tsundere` → `zen`) |
-| **`c`** | Ganti character pack *(jika ada >1 pack di `characters/`)* |
-| **`s`** | Tampilkan / sembunyikan footer statistik sesi |
-| **`l`** | Tampilkan / sembunyikan mini log aktivitas terakhir |
-| **`1`–`6`** | Ganti state manual *(khusus `--demo`: `1` idle, `2` think, `3` code, `4` error, `5` done, `6` sleepy)* |
-| **`q`** | Keluar |
+| **`t`** | Cycle color theme (`mono` → `amber` → `green` → `cyan` → `pastel`) |
+| **`m`** | Cycle persona/dialogue style (`santai` → `formal` → `tsundere` → `zen`) |
+| **`c`** | Cycle character pack *(if >1 pack exists in `characters/`)* |
+| **`s`** | Show / hide session stats footer |
+| **`l`** | Show / hide recent activity mini log |
+| **`1`–`6`** | Switch state manually *(`--demo` only: `1` idle, `2` think, `3` code, `4` error, `5` done, `6` sleepy)* |
+| **`q`** | Quit |
 
 ---
 
-## 2. Integrasi Otomatis dengan Antigravity CLI (Windows)
+## 2. Automatic Integration with Antigravity CLI (Windows)
 
-Jalankan installer otomatis dari folder project ini untuk memasang hook di `~/.gemini/config/hooks.json` (membuat backup `.bak`, tidak menimpa hook lain) sekaligus memasang shortcut `agy-live` ke PowerShell `$PROFILE`:
+Run the automatic installer from this project folder to register hooks in `~/.gemini/config/hooks.json` (creates a `.bak` backup, does not overwrite other hooks) and add the `agy-live` shortcut to your PowerShell `$PROFILE`:
 
 ```powershell
 .\scripts\install.ps1
 . $PROFILE
 ```
 
-Lalu jalankan:
+Then run:
 
 ```powershell
 agy-live
 agy-live --theme amber
-agy-live --theme pastel --persona zen --log -p "tolong review folder ini"
+agy-live --theme pastel --persona zen --log -p "please review this folder"
 ```
 
-> **Integrasi Manual:** Jika tidak memakai `install.ps1`, salin/gabungkan isi [hooks.json.example](./hooks.json.example) ke `~/.gemini/config/hooks.json` (sesuaikan path ke `hook_reporter.py`), lalu tambahkan fungsi `agy-live` di `$PROFILE` yang memanggil `scripts\launch-agy-live.ps1`.
+> **Manual Integration:** If not using `install.ps1`, copy/merge the contents of [hooks.json.example](./hooks.json.example) into `~/.gemini/config/hooks.json` (adjust the path to `hook_reporter.py`), then add an `agy-live` function in `$PROFILE` that calls `scripts\launch-agy-live.ps1`.
 >
-> **Catatan tentang `PreToolUse`:** Secara default `hook_reporter.py` keluar dengan exit code `0` tanpa mencetak JSON untuk `PreToolUse` agar tidak mengubah kebijakan izin (*permission*) bawaan `agy`. Jika perlu respons eksplisit, tambahkan `--pretool-decision ask`.
+> **Note on `PreToolUse`:** By default, `hook_reporter.py` exits with code `0` without printing JSON for `PreToolUse` so it does not alter `agy`'s built-in permission policy. If an explicit response is needed, add `--pretool-decision ask`.
 
 ---
 
 ## 3. Linux / macOS / WSL & Packaging
 
-Untuk **Linux / macOS / WSL** (otomatis mendeteksi `tmux` atau `WezTerm`):
+For **Linux / macOS / WSL** (automatically detects `tmux` or `WezTerm`):
 
 ```bash
 chmod +x scripts/launch-agy-live.sh
 ./scripts/launch-agy-live.sh --theme amber --persona zen
 ```
 
-Install sebagai CLI package Python (`agy-companion`, `agy-companion-hook`, `agy-companion-convert`):
+Install as a Python CLI package (`agy-companion`, `agy-companion-hook`, `agy-companion-convert`):
 
 ```powershell
-pip install -e .              # runtime (0 dependency)
-pip install -e ".[convert]"   # termasuk Pillow untuk konverter PNG
+pip install -e .              # runtime (0 dependencies)
+pip install -e ".[convert]"   # includes Pillow for the PNG converter
 ```
 
 ---
 
-## 4. Referensi Opsi CLI
+## 4. CLI Options Reference
 
 ### `companion.py` & `agy-live`
-| Opsi | Default | Keterangan |
+| Option | Default | Description |
 | :--- | :--- | :--- |
-| `--theme <nama>` | `mono` | Pilih tema warna: `mono`, `amber`, `green`, `cyan`, `pastel` |
-| `--persona <nama>` | `santai` | Pilih gaya bahasa dialog: `santai`, `formal`, `tsundere`, `zen` |
-| `--character <id>` | `default` | Pilih character pack di `characters/<id>/` |
-| `--sleepy-after <detik>` | `300` | Durasi idle sebelum masuk mode `sleepy` (`0` untuk nonaktifkan) |
-| `--no-stats` | *(aktif)* | Sembunyikan footer statistik sesi |
-| `--log` | *(off)* | Tampilkan mini log aktivitas sejak awal |
-| `--demo` / `--cycle` | *(off)* | Mode preview interaktif / putar otomatis *(khusus `companion.py`)* |
+| `--theme <name>` | `mono` | Choose color theme: `mono`, `amber`, `green`, `cyan`, `pastel` |
+| `--persona <name>` | `santai` | Choose dialogue style: `santai`, `formal`, `tsundere`, `zen` |
+| `--character <id>` | `default` | Choose character pack in `characters/<id>/` |
+| `--sleepy-after <seconds>` | `300` | Idle duration before entering `sleepy` mode (`0` to disable) |
+| `--no-stats` | *(on)* | Hide session stats footer |
+| `--log` | *(off)* | Show activity mini log from the start |
+| `--demo` / `--cycle` | *(off)* | Interactive preview / auto-cycle mode *(`companion.py` only)* |
 
-*(Pada `agy-live`, semua argumen lain diteruskan ke `agy`; gunakan `--` untuk meneruskan seluruh argumen setelahnya secara mentah ke `agy`).*
+*(In `agy-live`, all other arguments are passed through to `agy`; use `--` to pass all subsequent arguments verbatim to `agy`.)*
 
 ### `convert.py`
 ```powershell
@@ -109,10 +109,10 @@ python convert.py --character neko --all --width 45 --threshold 140
 
 ---
 
-## 5. Aset Sketsa, Character Pack & Testing
-- **Panduan sketsa manual PNG → Braille:** [ASSET_GUIDE.md](./ASSET_GUIDE.md)
-- **Panduan membuat Character Pack:** [characters/README.md](./characters/README.md)
-- **Jalankan unit & smoke test:**
+## 5. Sketch Assets, Character Packs & Testing
+- **Manual PNG → Braille sketch guide:** [ASSET_GUIDE.md](./ASSET_GUIDE.md)
+- **Character Pack creation guide:** [characters/README.md](./characters/README.md)
+- **Run unit & smoke tests:**
   ```powershell
   python tests/test_mvp.py
   ```
